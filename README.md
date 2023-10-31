@@ -1,1 +1,1 @@
-# lorem-ips2
+# social-media-app
