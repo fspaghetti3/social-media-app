@@ -3,6 +3,8 @@ const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../middleware/auth');
 
+
+
 // Create new post
 router.post('/', withAuth, async (req, res) => {
     console.log('POST route hit')
@@ -38,6 +40,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+
 // Get a single post by id
 router.get('/:id(\\d+)', async (req, res) => {
     try {
@@ -63,7 +66,7 @@ router.get('/:id(\\d+)', async (req, res) => {
         }
 
         const post = postData.get({ plain: true });
-        console.log(post); // 
+        console.log(post); // <-- This is where you'd place the code.
 
         const isAuthor = req.session.user_id === post.user.id;
 
@@ -88,6 +91,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
             res.status(404).json({ message: 'No post found with this id!' });
             return;
         }
+
         const post = postData.get({ plain: true });
 
         res.render('edit-post', {
@@ -124,6 +128,8 @@ router.put('/edit/:id', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+
 
 // Delete a post by id
 router.delete('/delete/:id', withAuth, async (req, res) => {
