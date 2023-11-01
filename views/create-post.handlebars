@@ -1,30 +1,32 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create a New Blog Post</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Create a New Blog Post</h1>
-    
-    <form action="/posts" method="POST">
-        <div>
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
+
+<body class="bg-neutral-100 flex flex-col items-center justify-center h-screen">
+    <h1 class="text-3xl text-blue-700 font-bold mb-4">Create a New Blog Post</h1>
+
+    <form action="/posts" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-96">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Title:</label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" id="title" name="title" required>
         </div>
-        
-        <div>
-            <label for="content">Content:</label>
-            <textarea id="content" name="content" rows="10" required></textarea>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="content">Content:</label>
+            <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="content" name="content" rows="5" required></textarea>
         </div>
-        
-        <div>
-            <input type="submit" value="Publish Post">
+
+        <div class="mb-4">
+            <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit" value="Publish Post">
         </div>
     </form>
-    
-    <br>
-    <a href="/dashboard">Back to Dashboard</a>
+
+    <a href="/dashboard" class="text-blue-700 hover:underline">Back to Dashboard</a>
 </body>
+
 </html>

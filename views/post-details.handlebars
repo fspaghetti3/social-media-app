@@ -1,71 +1,82 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{post.title}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>{{post.title}}</h1>
-    <p>By: {{post.user.username}}</p>
-    <p>{{post.content}}</p>
 
-    <h3>Add a Comment:</h3>
-    <form action="/comments" method="POST">
-        <textarea name="content" placeholder="Your comment here..." required></textarea><br>
-        <input type="hidden" name="post_id" value="{{post.id}}">
-        <button type="submit">Submit</button>
-    </form>
+<body class="bg-gray-200 h-screen p-4">
+    <div class="grid grid-cols-1 gap-4">
+        <div class="border border-blue-400 rounded p-4">
+            <h1 class="text-3xl font-bold text-blue-700 mb-4">{{post.title}}</h1>
+            <p class="text-gray-600">By: {{post.user.username}}</p>
+            <p class="text-gray-700 mb-4">{{post.content}}</p>
+        </div>
 
-        {{#if isAuthor}}
-        <h1>Hi author!</h1>
-        <a href="/posts/edit/{{post.id}}">Edit Post</a>
-
-            <form action="/posts/delete/{{post.id}}" method="POST">
-             <input type="hidden" name="_method" value="DELETE">
-             <a href="#" class="delete-post" data-id="{{post.id}}">Delete Post</a>
-
+        <div class="border border-blue-400 rounded p-4">
+            <h3 class="text-xl font-semibold mb-2">Add a Comment:</h3>
+            <form action="/comments" method="POST" class="mb-4">
+                <textarea name="content" placeholder="Your comment here..." required class="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-blue-500"></textarea><br>
+                <input type="hidden" name="post_id" value="{{post.id}}">
+                <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline">Submit</button>
             </form>
-    {{/if}}
+        </div>
 
-    <h2>Comments:</h2>
-    <ul>
-        {{#each post.comments}}
-            <li>
-                <p>{{this.content}} - By: {{this.user.username}}</p>
-            </li>
-        {{/each}}
-    </ul>
+        <div class="border border-blue-400 rounded p-4">
+            {{#if isAuthor}}
+            <h1 class="text-2xl font-bold mb-2">Hi author!</h1>
+            <a href="/posts/edit/{{post.id}}" class="text-blue-500 hover:underline mr-4">Edit Post</a>
+            <form action="/posts/delete/{{post.id}}" method="POST" class="inline">
+                <input type="hidden" name="_method" value="DELETE">
+                <a href="#" class="text-red-500 hover:underline delete-post" data-id="{{post.id}}">Delete Post</a>
+            </form>
+            {{/if}}
+        </div>
 
-    <br>
-    <a href="/posts/latest">Back to Latest Posts</a>
+        <div class="border border-blue-400 rounded p-4">
+            <h2 class="text-lg font-semibold mt-4 mb-2">Comments:</h2>
+            <ul>
+                {{#each post.comments}}
+                <li class="text-gray-700 mb-2"><p>{{this.content}} - By: {{this.user.username}}</p></li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <div class="border border-blue-400 rounded p-4">
+            <br>
+            <a href="/posts/latest" class="text-blue-500 hover:underline mt-4">Back to Latest Posts</a>
+        </div>
+    </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    const deleteButtons = document.querySelectorAll('.delete-post');
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const deleteButtons = document.querySelectorAll('.delete-post');
 
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const postId = e.target.getAttribute('data-id');
-            
-            fetch(`/posts/delete/${postId}`, {
-                method: 'DELETE'
-            })
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = '/posts/latest';
-                } else {
-                    alert('Failed to delete post');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const postId = e.target.getAttribute('data-id');
+
+                    fetch(`/posts/delete/${postId}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = '/posts/latest';
+                        } else {
+                            alert('Failed to delete post');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                });
             });
         });
-    });
-});
-</script>
+    </script>
 </body>
+
 </html>

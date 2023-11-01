@@ -20,7 +20,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     database: 'social_db',
-    password: 'fred1231'
+    password: '1234'
 });
 connection.connect();
 process.on('exit', () => {
