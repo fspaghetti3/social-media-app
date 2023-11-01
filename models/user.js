@@ -2,6 +2,7 @@
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
+const Post = require('./post')
 
 class User extends Model {}
 
@@ -46,5 +47,10 @@ User.init(
     }
     
 );
+
+User.hasMany(Post, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+});
 
 module.exports = User;
