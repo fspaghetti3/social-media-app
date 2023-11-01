@@ -1,3 +1,4 @@
+
 // models/post.js
 
 const { Model, DataTypes } = require('sequelize');
