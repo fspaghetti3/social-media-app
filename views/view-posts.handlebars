@@ -1,0 +1,12 @@
+<h1>Latest Posts</h1>
+<ul>
+    {{#each posts}}
+    <li>
+        <h2>{{this.title}}</h2>
+        <p>By: {{this.user.username}}</p>
+        <p>{{this.content}}</p>
+        
+        <a href="/posts/{{this.id}}">View/Comment</a>
+    </li>
+    {{/each}}
+</ul>

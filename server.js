@@ -45,7 +45,7 @@ app.use(session({
 }));
 app.use((req, res, next) => {
     try {
-        console.log([DEBUG] ${ req.method } ${ req.url });
+        console.log(`[DEBUG] ${ req.method } ${ req.url }`);
     } catch (err) {
         console.error('An error occured:', err)
     }
@@ -70,5 +70,5 @@ app.get('/posts/latest', (req, res) => {
     res.render('view-posts')
 })
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(Server running on http://localhost:${PORT}));
+    app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 });
