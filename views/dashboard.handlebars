@@ -1,6 +1,21 @@
-<h1>Welcome back, {{ username }}!</h1>
+<!DOCTYPE html>
+<html>
 
+<head>
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
 
-<a href="/posts/create" method="post">Create Blog Post</a><br>
-<a href="/users/logout">Logout</a>
-<a href="/posts/latest">Posts</a>
+<body class="bg-red-200 flex flex-col items-center justify-center h-screen">
+    <div class="text-center mb-8">
+        <h1 class="text-8xl text-white font-bold mb-8">Welcome back, {{ username }}!</h1>
+    </div>
+
+    <div class="text-center">
+        <a href="/posts/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4 mb-2 inline-block">Create Blog Post</a>
+        <a href="/users/logout" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mr-4 mb-2 inline-block">Logout</a>
+        <a href="/posts/latest" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-2 inline-block">Posts</a>
+    </div>
+</body>
+
+</html>
