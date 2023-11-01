@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{post.title}}</title>
+</head>
+<body>
+    <h1>{{post.title}}</h1>
+    <p>By: {{post.user.username}}</p>
+    <p>{{post.content}}</p>
+
+    <h3>Add a Comment:</h3>
+    <form action="/comments" method="POST">
+        <textarea name="content" placeholder="Your comment here..." required></textarea><br>
+        <input type="hidden" name="post_id" value="{{post.id}}">
+        <button type="submit">Submit</button>
+    </form>
+
+        {{#if isAuthor}}
+        <h1>Hi author!</h1>
+        <a href="/posts/edit/{{post.id}}">Edit Post</a>
+
+            <form action="/posts/delete/{{post.id}}" method="POST">
+             <input type="hidden" name="_method" value="DELETE">
+             <a href="#" class="delete-post" data-id="{{post.id}}">Delete Post</a>
+
+            </form>
+    {{/if}}
+
+    <h2>Comments:</h2>
+    <ul>
+        {{#each post.comments}}
+            <li>
+                <p>{{this.content}} - By: {{this.user.username}}</p>
+            </li>
+        {{/each}}
+    </ul>
+
+    <br>
+    <a href="/posts/latest">Back to Latest Posts</a>
+
+    <script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const deleteButtons = document.querySelectorAll('.delete-post');
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const postId = e.target.getAttribute('data-id');
+            
+            fetch(`/posts/delete/${postId}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/posts/latest';
+                } else {
+                    alert('Failed to delete post');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+});
+</script>
+</body>
+</html>
