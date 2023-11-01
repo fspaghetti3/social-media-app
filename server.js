@@ -2,6 +2,7 @@
 require('dotenv').config();
 const express = require('express')
 const session = require('express-session')
+const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
 const routes = require('./routes')
 const dashboardRoutes = require('./routes/dashboard-routes')
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'views'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     secret: 'super secret',
     resave: false,
@@ -54,6 +56,7 @@ app.use((req, res, next) => {
 app.use(routes)
 app.use('/', dashboardRoutes)
 app.use('/posts', postRoutes)
+
 app.get('/', (req, res) => {
     res.render('login')
 })
