@@ -7,6 +7,13 @@ const exphbs = require('express-handlebars');
 const routes = require('./routes');
 const dashBoardRoutes =require('./routes/dashboard-routes')
 const postRoutes = require('./routes/post-routes')
+const sequelize = require('./config/connection')
+const mysql = require('mysql2')
+const path = require('path')
+const cloudinary = require('cloudinary');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const multer  = require('multer');
+
 const sequelize = require('./config/connection');
 const path = require('path');
 const methodOverride = require('method-override')
@@ -23,14 +30,31 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     database: 'social_db',
-    password: '1234'
+    password: 'password123'
 });
 
 connection.connect();
 
 process.on('exit', () => {
     connection.end();
+});
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+});
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+      folder: 'images',
+    //   format: async (req, file) => 'png', // supports promises as well
+    //   public_id: (req, file) => 'computed-filename-using-request',
+    },
   });
+
+const upload = multer({storage: storage})
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -40,6 +64,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars')
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(methodOverride('_method'));
@@ -111,6 +136,9 @@ app.get('/posts/latest', (req, res) => {
     res.render('view-posts')
 })
 
+app.post('/upload', upload.single('image'), (req, res) => {
+    res.json({picture: req.file})
+})
 
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
