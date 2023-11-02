@@ -14,8 +14,6 @@ const cloudinary = require('cloudinary');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer  = require('multer');
 
-const sequelize = require('./config/connection');
-const path = require('path');
 const methodOverride = require('method-override')
 const hbs = exphbs.create({
     helpers: {
@@ -25,18 +23,43 @@ const hbs = exphbs.create({
         }
 });
 
-const mysql = require('mysql2')
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'social_db',
-    password: 'password123'
+const url = require('url');
+
+let connection;
+
+if (process.env.JAWSDB_URL) {
+    const jawsdb = url.parse(process.env.JAWSDB_URL);
+    const auth = jawsdb.auth.split(':');
+
+    connection = mysql.createConnection({
+        host: jawsdb.hostname,
+        user: auth[0],
+        password: auth[1],
+        database: jawsdb.pathname.substr(1),
+        port: jawsdb.port
+    });
+} else {
+
+    connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'social_db',
+        password: process.env.DB_PW
+    });
+}
+
+connection.connect((err) => {
+    if (err) {
+        console.error('Error connecting to the database:', err);
+        return;
+    }
+    console.log('Connected to the database');
 });
 
-connection.connect();
-
 process.on('exit', () => {
-    connection.end();
+    connection.end(() => {
+        console.log('Database connection closed');
+    });
 });
 
 cloudinary.config({
