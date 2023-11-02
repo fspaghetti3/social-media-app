@@ -5,7 +5,7 @@ const url = require('url');
 
 let dbUrl = process.env.JAWSDB_URL;
 if (!dbUrl) {
-  dbUrl = 'mysql://rfl7tm97s8ylvvv8:gn5x4vwfzdbx2w8h@ckshdphy86qnz0bj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/tqd0vzz8uylev2mu';
+  dbUrl = 'mysql://wqw3xm5u7yc0w7h2:hihk5qvqxva4zo19@uzb4o9e2oe257glt.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/z702xqy8pyz2jgd9';
 }
 
 const params = url.parse(dbUrl);
