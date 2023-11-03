@@ -4,8 +4,49 @@ const { User } = require('../models');
 const bcrypt = require('bcrypt');
 const withAuth = require('../middleware/auth');
 
-router.get('/login', (req, res) => {
-    res.render('login');
+router.post('/', async (req, res) => {
+    try {
+        const userData = await User.create(req.body);
+
+        req.session.save(() => {
+            req.session.user_id = userData.id;
+            // req.session.username = userData.username;
+            req.session.loggedIn = true;
+
+            res.status(200).json(userData);
+        });
+    } catch (err) {
+            console.error("Error in login route:", err)
+            res.status(400).json(err);
+    } 
+});
+
+router.post('/login', async (req, res) => {
+    try {
+        const userData = await User.findOne({ where: { username: req.body.username } });
+        console.log("User data from DB:", userData ? userData.get() : "No user found.")
+        if (!userData) {
+            console.log("User not found in database:", req.body.username)
+            res.status(400).json({ message: 'Incorrect username or password' });
+            return;
+        }
+
+        const validPassword = await bcrypt.compare(req.body.password, userData.password);
+        console.log("Is password valid?", validPassword)
+        if (!validPassword) {
+            console.log("Incorrect password for:", req.body.username)
+            res.status(400).json({ message: 'Incorrect username or password' });
+            return;
+        }
+
+
+            res.redirect('/dashboard');
+       
+    } catch (error) {
+
+    }
+// }
+    // console.log("User", req.body.username, "is attempting to log in.")
 });
 
 router.get('/signup', (req, res) => {
@@ -36,36 +77,6 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
-    try {
-        const userData = await User.findOne({ where: { username: req.body.username } });
-        console.log("User data from DB:", userData ? userData.get() : "No user found.")
-        if (!userData) {
-            console.log("User not found in database:", req.body.username)
-            res.status(400).json({ message: 'Incorrect username or password' });
-            return;
-        }
-
-        const validPassword = await bcrypt.compare(req.body.password, userData.password);
-        console.log("Is password valid?", validPassword)
-        if (!validPassword) {
-            console.log("Incorrect password for:", req.body.username)
-            res.status(400).json({ message: 'Incorrect username or password' });
-            return;
-        }
-
-        req.session.save(() => {
-            req.session.user_id = userData.id;
-            req.session.username = userData.username;
-            req.session.loggedIn = true;
-            res.redirect('/dashboard');
-        });
-    } catch (err) {
-        console.error("Error in login route:", err)
-        res.status(500).json(err);
-    }
-    console.log("User", req.body.username, "is attempting to log in.")
-});
 
 router.get('/dashboard', async (req, res) => {
     if (!req.session.loggedIn) {

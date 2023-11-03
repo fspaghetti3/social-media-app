@@ -15,7 +15,7 @@ router.post('/', withAuth, async (req, res) => {
             user_id: req.session.user_id
         });
 
-        res.redirect('/posts/latest');
+        res.render('create-post')
     } catch (err) {
         res.status(500).json(err);
     }

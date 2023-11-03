@@ -62,22 +62,7 @@ process.on('exit', () => {
     });
 });
 
-cloudinary.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET
-});
 
-const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-    params: {
-      folder: 'images',
-    //   format: async (req, file) => 'png', // supports promises as well
-    //   public_id: (req, file) => 'computed-filename-using-request',
-    },
-  });
-
-const upload = multer({storage: storage})
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -136,7 +121,7 @@ app.use('/', dashBoardRoutes)
 app.use('/posts', postRoutes);
 
 app.get('/', (req, res) => {
-    res.render('base')
+    res.render('home')
 })
 
 app.get('/login', (req, res) => {
@@ -159,9 +144,7 @@ app.get('/posts/latest', (req, res) => {
     res.render('view-posts')
 })
 
-app.post('/upload', upload.single('image'), (req, res) => {
-    res.json({picture: req.file})
-})
+
 
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
