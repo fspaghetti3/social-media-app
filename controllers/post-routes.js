@@ -129,8 +129,6 @@ router.put('/edit/:id', withAuth, async (req, res) => {
     }
 });
 
-
-
 // Delete a post by id
 router.delete('/delete/:id', withAuth, async (req, res) => {
     try {
@@ -170,7 +168,7 @@ router.get('/latest', async (req, res) => {
             order: [
                 ['createdAt', 'DESC']
             ],
-            limit: 10  // Limit to the 10 most recent posts, or any number you prefer
+            limit: 10 
         });
 
         const posts = postData.map(post => post.get({ plain: true }));
