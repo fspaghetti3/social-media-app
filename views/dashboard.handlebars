@@ -23,11 +23,11 @@
 
     <div class="w-96 mx-auto">
         {{#each posts}}
-        <div class="w-4/5 bg-white shadow-md rounded border-4 border-blue-400 px-4 py-3 mb-4">
+        <div class="post-item  w-4/5 bg-white shadow-md rounded border-4 border-blue-400 px-4 py-3 mb-4">
         {{#if this.image}}
         <img src="{{this.image}}" alt="{{this.title}}">
         {{else}}
-        <video src="{{this.video}}" controls autoplay></video>
+        <video src="{{this.video}}" controls></video>
         {{/if}}
             <h2 class="text-lg font-semibold mb-2 text-blue-700">{{this.title}}</h2>
             <p class="text-gray-600">By: {{this.user.username}}</p>
@@ -36,6 +36,7 @@
         </div>
         {{/each}}
     </div>
+    <script src="/js/video.js"></script>
 </body>
 
 </html>
