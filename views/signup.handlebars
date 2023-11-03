@@ -4,27 +4,47 @@
 <head>
     <title>Signup Form</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .card-bg {
+            background: url('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHNwYWNlfGVufDB8fDB8fHww') no-repeat center center;
+            background-size: cover;
+        }
+        body {
+            background-image: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNwYWNlfGVufDB8fDB8fHww');
+            background-size: cover;
+        }
+    </style>
 </head>
 
-<body class="bg-red-200 flex flex-col items-center justify-center h-screen">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-64" action="/users/signup" method="post">
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username:</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="username" required>
-        </div>
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password:</label>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" required minlength="8">
-        </div>
-        <div class="flex items-center justify-between">
-            <button class="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Sign Up</button>
-        </div>
-    </form>
+<body class="bg-blue-900 flex flex-col items-center justify-center h-screen">
+    <!-- Header for Design -->
+    <header class="text-4xl font-bold text-black p-8">
+        Please insert all your personal info so we can sell it.
+    </header>
 
-    {{#if success}}
-    <p class="text-green-700">Successful Signup!</p>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="location.href='/users/login'">Go to Login</button>
-    {{/if}}
+    <div class="flex items-center justify-center">
+        <!-- Card Styling for Form -->
+        <div class="card-bg bg-blue-800 bg-opacity-90 shadow-md rounded-lg p-8 mb-4 w-64 text-white">
+            <form action="/users/signup" method="post">
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2" for="username">Username:</label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" type="text" name="username" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2" for="password">Password:</label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline" type="password" name="password" required minlength="8">
+                </div>
+                <div class="flex items-center justify-between">
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Sign Up</button>
+                </div>
+            </form>
+
+            {{#if success}}
+            <p class="text-green-300">Successful Signup!</p>
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="location.href='/users/login'">Go to Login</button>
+            {{/if}}
+        </div>
+    </div>
 </body>
 
 </html>

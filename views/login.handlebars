@@ -1,34 +1,49 @@
+<!DOCTYPE html>
 <html>
 
 <head>
     <title>Login Form</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1464802686167-b939a6910659?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c3BhY2V8ZW58MHx8MHx8fDA%3D');
+            background-size: cover;
+        }
+    </style>
 </head>
 
-<body class="bg-blue-100 flex flex-col items-center justify-center h-screen"
-    style="background-image: url('https://images.pexels.com/photos/956999/pexels-photo-956999.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-64" action="/users/login" method="post">
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username:</label>
-            <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username" name="username" type="text" required>
+<body class="flex h-screen items-center justify-center bg-black bg-opacity-90">
+    <div class="w-1/2 p-8 bg-gray-900 rounded-l-lg">
+        <header class="text-4xl font-bold py-4">
+    <span class="text-white">S</span>
+    <span class="text-blue-500 animate-pulse">T</span>
+    <span class="text-yellow-400 transform scale-125">A</span>
+    <span class="text-pink-600">R</span>
+    <span class="text-white">Login</span>
+</header>
+        <!-- Card Styling for Form -->
+        <div class="shadow-md rounded-lg p-8 mt-4 text-white">
+            <form action="/users/login" method="post">
+                <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2" for="username">Username:</label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                        id="username" name="username" type="text" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-white text-sm font-bold mb-2" for="password">Password:</label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                        id="password" name="password" type="password" required>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit">Login</button>
+                </div>
+            </form>
+            <footer class="bg-blue-500 text-white text-center py-4 w-full mt-4">
+                <span class="text-sm">Don't have an account? <a href="/signup" class="underline">Sign up Here</a></span>
+            </footer>
         </div>
-        <div class="mb-6">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password:</label>
-            <input
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="password" name="password" type="password" required>
-        </div>
-        <div class="flex items-center justify-between">
-            <button
-                class="bg-blue-300 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit">Login</button>
-        </div>
-    </form>
-    <footer class="bg-blue-300 text-white text-center py-4 w-full">
-        <span class="text-sm">Don't have an account? <a href="/signup" class="underline">Sign up Here</a></span>
-    </footer>
+    </div>
 </body>
 
 </html>
