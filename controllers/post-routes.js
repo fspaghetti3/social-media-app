@@ -7,17 +7,15 @@ const withAuth = require('../middleware/auth');
 
 // Create new post
 router.post('/', withAuth, async (req, res) => {
-    console.log('POST route hit', req.body.image)
+    console.log('POST route hit')
     try {
         const newPost = await Post.create({
             title: req.body.title,
             content: req.body.content,
-            user_id: req.session.user_id,
-            image: req.body.image,
-            video: req.body.video
+            user_id: req.session.user_id
         });
 
-        res.redirect('/posts/latest');
+        res.render('create-post')
     } catch (err) {
         res.status(500).json(err);
     }
