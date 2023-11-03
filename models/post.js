@@ -38,6 +38,14 @@ Post.init(
       allowNull: false,
       defaultValue: 0,
     },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    video: {
+        type: DataTypes.STRING,
+        allowNull: true
+    }
   },
   {
     sequelize,
