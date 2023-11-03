@@ -17,7 +17,7 @@ router.post('/', withAuth, async (req, res) => {
             video: req.body.video
         });
 
-        res.redirect('/posts/latest');
+        res.redirect('/dashboard');
     } catch (err) {
         res.status(500).json(err);
     }
@@ -176,7 +176,7 @@ router.get('/latest', async (req, res) => {
         });
 
         const posts = postData.map(post => post.get({ plain: true }));
-        res.render('view-posts', { posts, 
+        res.render('dashboard', { posts, 
             loggedIn: req.session.loggedIn,
             sessionUserId: req.session.user_id
         });
