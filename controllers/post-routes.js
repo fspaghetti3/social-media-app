@@ -7,15 +7,17 @@ const withAuth = require('../middleware/auth');
 
 // Create new post
 router.post('/', withAuth, async (req, res) => {
-    console.log('POST route hit')
+    console.log('POST route hit', req.body.image)
     try {
         const newPost = await Post.create({
             title: req.body.title,
             content: req.body.content,
-            user_id: req.session.user_id
+            user_id: req.session.user_id,
+            image: req.body.image,
+            video: req.body.video
         });
 
-        res.render('create-post')
+        res.redirect('/posts/latest');
     } catch (err) {
         res.status(500).json(err);
     }
@@ -129,6 +131,8 @@ router.put('/edit/:id', withAuth, async (req, res) => {
     }
 });
 
+
+
 // Delete a post by id
 router.delete('/delete/:id', withAuth, async (req, res) => {
     try {
@@ -168,7 +172,7 @@ router.get('/latest', async (req, res) => {
             order: [
                 ['createdAt', 'DESC']
             ],
-            limit: 10 
+            limit: 10  // Limit to the 10 most recent posts, or any number you prefer
         });
 
         const posts = postData.map(post => post.get({ plain: true }));
@@ -180,5 +184,7 @@ router.get('/latest', async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+
 
 module.exports = router;
