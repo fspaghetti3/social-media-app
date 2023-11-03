@@ -78,7 +78,6 @@ router.post('/signup', async (req, res) => {
 });
 
 
-
 router.get('/dashboard', async (req, res) => {
     if (!req.session.loggedIn) {
         res.redirect('/users/login');
