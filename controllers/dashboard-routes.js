@@ -1,7 +1,8 @@
 // routes/dashboard-routes.js
 const router = require('express').Router()
-const { Post, User } = require('../models');
+const { Post, User, Comment } = require('../models');
 const withAuth = require('../middleware/auth')
+
 
 router.get('/dashboard', withAuth, async (req, res) => {
     try {
@@ -12,6 +13,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
                 {
                     model: User,
                     attributes: ['username']
+                },
+                {
+                    model: Comment,
                 }
             ],
             order: [
@@ -20,7 +24,6 @@ router.get('/dashboard', withAuth, async (req, res) => {
         });
 
         const posts = postData.map(post => post.get({ plain: true }));
-
         res.render('dashboard', {
             posts,
             username: req.session.username,
