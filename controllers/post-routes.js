@@ -206,7 +206,7 @@ router.put('/:id/like', withAuth, async (req, res) => {
 
         
 
-        res.json(updatedPostData);
+        res.json({likes: postData.likes+1});
     } catch (err) {
         res.status(500).json(err);
     }

@@ -23,15 +23,19 @@
 
     <div class="w-96 mx-auto">
         {{#each posts}}
-        <div class="post-item  w-4/5 bg-white shadow-md rounded border-4 border-blue-400 px-4 py-3 mb-4">
+        <div id="{{this.id}}" class="post-item  w-4/5 bg-white shadow-md rounded border-4 border-blue-400 px-4 py-3 mb-4">
         {{#if this.image}}
         <img src="{{this.image}}" alt="{{this.title}}">
         {{else}}
         <video src="{{this.video}}" controls></video>
         {{/if}}
-            <div class="flex justify-between">
-                <button class="text-center p-1 like border border-solid border-2 bg-grey-400 mt-2 rounded px-5">{{this.likes}} likes</button>
-                <a href="/posts/{{this.id}}" class="text-center p-1 like border border-solid border-2 bg-grey-400 mt-2 rounded px-5 text-blue-500 hover:underline">View/Comment  <span class="text-green-600">{{this.comments.length}}</span></a>
+            <div class="relative flex justify-between reactions">
+                <div class="hidden justify-center absolute -top-7 z-40 p-1 border-solid border-black">
+                    <span class="mr-2 likes">&#x1F44D</span>
+                    <span class="dislikes">&#x1F44E</span>
+                </div>
+                <button class="text-center p-1 like border border-solid border-2 bg-grey-400 mt-2 rounded px-5 w-1/2">{{this.likes}} likes</button>
+                <a href="/posts/{{this.id}}" class="text-center p-1 like border border-solid border-2 bg-grey-400 mt-2 rounded px-5 text-blue-500 hover:underline">Comment  <span class="text-green-600">{{this.comments.length}}</span></a>
             </div>
             <h2 class="text-lg font-semibold mb-2 text-blue-700">{{this.title}}</h2>
             <p class="text-gray-600">By: {{this.user.username}}</p>
