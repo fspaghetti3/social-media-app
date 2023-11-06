@@ -14,7 +14,7 @@
   Installation: Clone the repository and run npm install to install dependencies.
 Database Setup: Configure the database connection and schema. Update database settings in the .env file.
 Starting the App: Execute npm start to launch the application.
-Usage: Open a web browser and go to http://localhost:3000 to access the web app.
+Usage: Open a web browser and go to http://localhost:3001 to access the web app.
   ## Usage
   MVC Architecture: The application follows the MVC design pattern to separate concerns between data models, views, and controllers.
 Express Routes: Defines routes and endpoints to handle HTTP requests and logic for rendering views or returning data to the client.
@@ -26,7 +26,9 @@ Static Assets: Serves static assets (CSS, JavaScript, images) using Express stat
   This project is licensed under the License1 License.
   
   ## Contributing
-  Contributions are welcome! Please create a pull request and describe the changes you've made or the feature you've added.
+  Fred Solleder: https://github.com/fspaghetti3
+  Raymond Bell: https://github.com/G6-2Flyy
+  Zechiel Lozer: https://github.com/ZD0341
   
   ## Tests
  application has no testing code currently. 
