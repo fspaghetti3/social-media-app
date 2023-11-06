@@ -1,0 +1,37 @@
+    <div class="container mx-auto h-full">
+        <h1 class="text-3xl text-blue-700 font-bold mb-4">Edit Profile</h1>
+
+        <form action="/users/edit" method="POST" class="bg-white shadow-md rounded p-8 h-full w-full">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="title">Username:</label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    type="text" id="username" name="username" value="{{user.username}}" required />
+            </div>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="content">Email:</label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="content" name="email" rows="5" required>
+            </div>
+
+            <div>
+                <input type="url" id="image_url" name="image" hidden>
+            </div>
+
+            <div class="mb-4">
+                <input
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit" value="Publish Post" />
+                <button type="button" id="upload_widget" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded">Upload Profile Image</button>
+            </div>
+        </form>
+
+        <a href="/profile" class="text-blue-700 hover:underline">Back to Profile</a>
+        </div>
+
+        <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/cloudinary-video-player@1.10.0/dist/cld-video-player.min.js"
+            type="text/javascript"></script>
+        <script src="/js/createpost.js"></script>

@@ -25,6 +25,15 @@ User.init(
                 len: [8]
             }
         },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            unique: true
+        },
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        }
     },
     {
         hooks: {

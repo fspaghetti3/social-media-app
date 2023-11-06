@@ -146,6 +146,6 @@ app.get('/posts/latest', (req, res) => {
 
 
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: false}).then(() => {
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 });
