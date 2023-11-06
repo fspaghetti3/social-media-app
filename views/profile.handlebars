@@ -1,32 +1,30 @@
-{{!-- <div class="profile">
-    <div class="picture">
-        <img src="{{user.image}}" alt="">
-    </div>
-    <div class="details">
-        <h2>{{user.username}}</h2>
-        <p>{{user.email}}</p>
-    </div>
-</div> --}}
+<head>
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1693880717208-d9af6ba19a4d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+        }
 
-<div
-  class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
->
+        .hover-shadow:hover {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
 
-  <div class="flex flex-col items-center pb-10">
-    <img
-      class="w-24 h-24 mb-3 rounded-full shadow-lg"
-      src="{{user.image}}"
-      alt="image"
-    />
-    <h5
-      class="mb-1 text-xl font-medium text-gray-900 dark:text-white"
-    >{{user.username}}</h5>
-    <span class="text-sm text-gray-500 dark:text-gray-400">{{user.email}}</span>
-    <div class="flex mt-4 space-x-3 md:mt-6">
-      <a
-        href="/profile/edit"
-        class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >Edit Profile</a>
+<div class="flex items-center justify-center h-screen dark:bg-gray-900">
+  <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex flex-col items-center p-10">
+      <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{user.image}}" alt="Profile Image" />
+      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{user.username}}</h5>
+      <span class="text-sm text-gray-500 dark:text-gray-400">{{user.email}}</span>
+      <div class="flex mt-4 space-x-3 md:mt-6">
+        <a href="/profile/edit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Edit Profile
+        </a>
+      </div>
     </div>
   </div>
 </div>
